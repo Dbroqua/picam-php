@@ -23,9 +23,9 @@
   <body>
         <div class="container">
                 <div class="main">
-                        <h1>Motion@home</h1>
+                        <h1>PiCam</h1>
                         <div class="col-xs-9">
-                                <h2>Cam 1 - Salon</h2>
+                                <h2>Living room</h2>
                         </div>
                         <div class="col-xs-3 text-right">
                                 <button type="button" data-state="start" class="btn btn-primary">Run Motion</button>
@@ -62,7 +62,7 @@
                                 </div>
                         </div>
                         <div class="col-xs-12 col-sm-8">
-                                <img src="http://192.168.1.6/cam/" alt="Cam" title="Live" class="img-responsive  img-rounded" id="cam1" />
+                                <img src="http://192.168.1.6/cam/" alt="Cam" title="Live" class="img-responsive  img-rounded" id="Living room" />
                         </div>
                 </div>
         </div>
