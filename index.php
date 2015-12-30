@@ -62,7 +62,7 @@
                                 </div>
                         </div>
                         <div class="col-xs-12 col-sm-8">
-                                <img src="http://192.168.1.6/cam/" alt="Cam" title="Live" class="img-responsive  img-rounded" id="Living room" />
+                                <img src="/cam/" alt="Cam" title="Live" class="img-responsive  img-rounded" id="Living room" />
                         </div>
                 </div>
         </div>
