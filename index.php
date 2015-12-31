@@ -104,7 +104,8 @@
                         if( data.run != lastState ){
                             lastState = data.run;
                             if( data.run === true ){
-                                $('#cam1').attr('src','/cam');
+                                var d = new Date();
+                                $('#cam1').attr('src','/cam?'+d.getTime());
                             }else{
                                 $('#cam1').attr('src','no_webcam.png');
                             }
