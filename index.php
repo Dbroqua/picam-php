@@ -29,12 +29,23 @@
         <div class="container">
             <div class="main">
                 <h1>PiCam</h1>
-                <div class="col-xs-12 col-sm-8">
+                <div class="col-xs-11">
                     <h2>Living room</h2>
                 </div>
-                <div class="col-xs-12 col-sm-4 text-right">
-                    <button type="button" data-state="start" class="btn btn-primary">Run Motion</button>
-                    <button type="button" data-state="stop" class="btn btn-danger">Stop Motion</button>
+                <div class="col-xs-1">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Actions
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#" data-state="start" class="action"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Run Motion</a></li>
+                            <li><a href="#" data-state="start_detection" class="action"><span class="glyphicon glyphicon-play " aria-hidden="true"></span> Start detection</a></li>
+                            <li><a href="#" data-state="stop_detection" class="action"><span class="glyphicon glyphicon-stop " aria-hidden="true"></span> Stop detection</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" data-state="stop" class="action"><span class="glyphicon glyphicon-off " aria-hidden="true"></span> Stop Motion</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="clear"></div>
                 <div class="col-xs-12 col-sm-4">
@@ -50,6 +61,10 @@
                             <tr>
                                 <td>State</td>
                                 <td class="state"></td>
+                            </tr>
+                            <tr>
+                                <td>Detection state</td>
+                                <td class="detectionstate"></td>
                             </tr>
                             <tr>
                                 <td>Last detection</td>
@@ -100,6 +115,16 @@
                         }else{
                             $('.state').html('not running <span class="glyphicon glyphicon-remove alert-danger" aria-hidden="true"></span>');
                         }
+                        switch ( data.detectionstate ){
+                            case 'active':
+                                $('.detectionstate').html('Active <span class="glyphicon glyphicon-ok alert-success" aria-hidden="true"></span>');
+                                break;
+                            case 'pause':
+                                $('.detectionstate').html('Pause <span class="glyphicon glyphicon-pause alert-warning" aria-hidden="true"></span>');
+                                break;
+                            default:
+                                $('.detectionstate').html('Pause <span class="glyphicon glyphicon-remove alert-danger" aria-hidden="true"></span>');
+                        }
                         $('.lastedetection').html(data.lastedetection);
                         $('.lastrun').html(data.lastrun);
                         $('.laststart').html(data.laststart);
@@ -113,7 +138,8 @@
                     state();
                 }, 3000 );
 
-                $('.btn').click(function(){
+                $('.action').click(function(e){
+                    e.preventDefault();
                     $.ajax({
                         url: "/action.php?action="+$(this).data('state'),
                         dataType: 'json'
