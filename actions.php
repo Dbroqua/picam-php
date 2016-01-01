@@ -1,12 +1,11 @@
 <?php
 $base_uri = "http://127.0.0.1:8081/0/detection/";
 $service = "sudo /etc/init.d/motion";
-$config_file = "/etc/motion.conf";
 $pid_file = '/var/run/motion/motion.pid';
 $intrusion_file = '/media/freebox/intrusion.date';
 
 function motion_web_admin( $uri ){
-    $loginPassword = exec('grep "webcontrol_authentication" '.$config_file.'|cut -d" " -f 2');
+    $loginPassword = exec('grep "webcontrol_authentication" /etc/motion.conf|cut -d" " -f 2');
     $headers = array(
         'Authorization: Basic '. base64_encode($loginPassword)
     );
