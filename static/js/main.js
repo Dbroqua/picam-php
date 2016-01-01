@@ -6,7 +6,7 @@ var lastState = null;
 
 function state(){
     $.ajax({
-        url: "/actions.php?action=",
+        url: "actions.php?action=",
         dataType: 'json',
         success: function( data ){
             var detectionStateElt = $('.detectionstate');
@@ -51,8 +51,32 @@ $( document ).ready(function() {
     $('.action').click(function(e){
         e.preventDefault();
         $.ajax({
-            url: "/actions.php?action="+$(this).data('state'),
+            url: "actions.php?action="+$(this).data('state'),
             dataType: 'json'
         });
+    });
+
+    $('.closeCaptured').on('click',function(e){
+        e.preventDefault();
+        $('.captured').hide("slow");
+    });
+    $('.viewCaptured').on('click',function(e){
+        e.preventDefault();
+        $.ajax({
+            url: "actions.php?action=getFiles",
+            dataType: 'json',
+            success: function( data ){
+                var list = $('.captured .list');
+                list.html("");
+                if( data.length > 0 ){
+                    $.each( data , function( index , value ){
+                        list.append('<div><img src="static/img/'+( value.filetype == 'avi' ? 'movie' : 'image' )+'.png"> <a href="getFile.php?filename='+value.filename+'">'+value.filename+'</a></div>');
+                    });
+                }
+                $('.captured').show("slow");
+            }
+        });
+
+
     });
 });
