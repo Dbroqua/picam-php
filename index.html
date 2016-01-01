@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-8">
-                    <img src="/cam" alt="Cam" title="Live" class="img-responsive  img-rounded" id="cam1" />
+                    <img src="/static/img/no_webcam.png" alt="Cam" title="Live" class="img-responsive  img-rounded" id="cam1" />
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@
 
             function state(){
                 $.ajax({
-                    url: "/action.php?action=",
+                    url: "/actions.php?action=",
                     dataType: 'json',
                     success: function( data ){
                         var detectionStateElt = $('.detectionstate');
@@ -108,7 +108,7 @@
                                 var d = new Date();
                                 $('#cam1').attr('src','/cam?'+d.getTime());
                             }else{
-                                $('#cam1').attr('src','no_webcam.png');
+                                $('#cam1').attr('src','/static/img/no_webcam.png');
                             }
                         }
 

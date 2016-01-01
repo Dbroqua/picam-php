@@ -1,6 +1,12 @@
 <?php
+$base_uri = "http://127.0.0.1:8081/0/detection/";
+$service = "sudo /etc/init.d/motion";
+$config_file = "/etc/motion.conf";
+$pid_file = '/var/run/motion/motion.pid';
+$intrusion_file = '/media/freebox/intrusion.date';
+
 function motion_web_admin( $uri ){
-    $loginPassword = exec('grep "webcontrol_authentication" /etc/motion.conf|cut -d" " -f 2');
+    $loginPassword = exec('grep "webcontrol_authentication" '.$config_file'|cut -d" " -f 2');
     $headers = array(
         'Authorization: Basic '. base64_encode($loginPassword)
     );
@@ -22,28 +28,26 @@ function motion_web_admin( $uri ){
 if( isset($_GET['action']) ){
     switch( $_GET['action'] ){
         case 'start':
-            exec('sudo /etc/init.d/motion start');
+            exec($service.' start');
         break;
         case 'stop':
-            exec('sudo /etc/init.d/motion stop');
+            exec($service.' stop');
         break;
         case "start_detection":
         case "stop_detection":
-            $uri = 'http://127.0.0.1:8081/0/detection/'.( $_GET['action'] == 'start_detection' ? 'start' : 'pause' );
+            $uri = $base_uri.( $_GET['action'] == 'start_detection' ? 'start' : 'pause' );
             motion_web_admin( $uri );
         break;
         default:
             $lastedetection = 'Never';
-            $laststart = 'Unknown';
-            $pid_file = '/var/run/motion/motion.pid';
-            $intrusion_file = '/media/freebox/intrusion.date';
+            $laststart = 'Unknown';            
             $detectionstate = 'off';
 
             $res = false;
             if( is_file( $pid_file ) ){
                 $res = true;
                 $laststart = date("Y-m-d H:i:s",exec('stat -c %Y '.$pid_file));
-                $detectionstate = motion_web_admin( 'http://127.0.0.1:8081/0/detection/status' );
+                $detectionstate = motion_web_admin( $base_uri.'status' );
                 if( strpos( $detectionstate , 'ACTIVE' ) > 0 ){
                     $detectionstate = 'active';
                 }else{
