@@ -9,10 +9,10 @@
         <link rel="icon" type="image/png" href="/favicon.png" />
 
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
 
         <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+        <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">
 
         <style type="text/css">
             .clear{clear: both;}
@@ -89,9 +89,9 @@
         </div>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/static/js/jquery-2.1.4.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
 
         <script type="text/javascript">
             var lastState = null;
@@ -101,6 +101,7 @@
                     url: "/action.php?action=",
                     dataType: 'json',
                     success: function( data ){
+                        var detectionStateElt = $('.detectionstate');
                         if( data.run != lastState ){
                             lastState = data.run;
                             if( data.run === true ){
@@ -118,13 +119,13 @@
                         }
                         switch ( data.detectionstate ){
                             case 'active':
-                                $('.detectionstate').html('Active <span class="glyphicon glyphicon-ok alert-success" aria-hidden="true"></span>');
+                                detectionStateElt.html('Active <span class="glyphicon glyphicon-ok alert-success" aria-hidden="true"></span>');
                                 break;
                             case 'pause':
-                                $('.detectionstate').html('Pause <span class="glyphicon glyphicon-pause alert-warning" aria-hidden="true"></span>');
+                                detectionStateElt.html('Pause <span class="glyphicon glyphicon-pause alert-warning" aria-hidden="true"></span>');
                                 break;
                             default:
-                                $('.detectionstate').html('Pause <span class="glyphicon glyphicon-remove alert-danger" aria-hidden="true"></span>');
+                                detectionStateElt.html('Pause <span class="glyphicon glyphicon-remove alert-danger" aria-hidden="true"></span>');
                         }
                         $('.lastedetection').html(data.lastedetection);
                         $('.lastrun').html(data.lastrun);
