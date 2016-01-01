@@ -5,6 +5,14 @@
  * Time: 14:26
  */
 
+function getDateFr( $value , $type ){
+    $arr = array(
+        'day' => array( 'dimanche' , 'lundi' , 'mardi' , 'mercredi' , 'jeudi' , 'vendredi' , 'samedi' ),
+        'month' => array( '' , 'janvier','février','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','décembre')
+    );
+    return $arr[$type][$value];
+}
+
 function motion_web_admin( $uri ){
     $loginPassword = exec('grep "webcontrol_authentication" /etc/motion.conf|cut -d" " -f 2');
     $headers = array(

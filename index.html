@@ -16,7 +16,10 @@
 
         <style type="text/css">
             .clear{clear: both;}
-            .list div{ float: left; padding: 5px; border: 1px solid #e7e7e7; margin: 5px; background: #f8f8f8;}
+            .results tr[visible='false'],.no-result{display:none;}
+            .results tr[visible='true']{display:table-row;}
+            .counter{padding:8px;color:#ccc;}
+            #searchclear {position: absolute;right: 5px;top: 0;bottom: 0;height: 14px;margin: auto;font-size: 14px;cursor: pointer;color: #ccc;}
         </style>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -27,6 +30,20 @@
         <![endif]-->
     </head>
     <body>
+        <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Image preview</h4>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <div class="main">
                 <h1>PiCam</h1>

@@ -24,9 +24,12 @@ if( isset($_GET['action']) ){
 
             foreach($dir as $file)
             {
+                $date = filemtime( $file );
                 $res[] = array(
                     'filename' => basename($file),
-                    'filetype' => pathinfo($file, PATHINFO_EXTENSION)
+                    'filetype' => pathinfo($file, PATHINFO_EXTENSION),
+                    'date' => getDateFr(date('w',$date),'day').' '.date('d' , filemtime( $file ) ).' '.getDateFr( date('n' , filemtime( $file ) ), 'month' ).' '.date('Y' , filemtime( $file ) ),
+                    'time' => date('h:i' , filemtime( $file ) )
                 );
             }
             echo json_encode($res);
