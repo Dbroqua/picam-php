@@ -1,3 +1,6 @@
+** Repo is actually fail **
+** More news in few weeks (I hope so) **
+
 # picam-php
 Simple web interface for Motion on Raspberry
 
