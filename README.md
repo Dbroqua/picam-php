@@ -1,5 +1,6 @@
-** Repo is actually fail **
-** More news in few weeks (I hope so) **
+ :warning: Abandoned project  :warning:
+
+Please use [PiCam-JS](https://github.com/Dbroqua/picam-js).
 
 # picam-php
 Simple web interface for Motion on Raspberry
